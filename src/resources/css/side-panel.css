@@ -1,0 +1,13 @@
+.side-panel-button {
+    -fx-background-color: #edf5e1;
+    -fx-background-radius: 0;
+}
+
+.side-panel-button:hover {
+    -fx-background-color: #d4dcc8;
+    -fx-cursor: hand;
+}
+
+.side-panel-hover {
+    -fx-background-color: #edf5e1;
+}
