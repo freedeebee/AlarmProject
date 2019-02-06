@@ -1,0 +1,5 @@
+.add-button {
+    -fx-background-color: #05386b;
+    -fx-cursor: hand;
+    -fx-background-radius: 50%;
+}

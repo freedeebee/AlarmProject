@@ -27,7 +27,7 @@ public class ClockController {
     private ChangeListener<String> clockListener = (obs, oldVal, newVal) -> {
 
         timeLabel = clockPanel.getTimeLabel();
-        clockPane = clockPanel.getClockPane();
+        clockPane = clockPanel.getUI();
         Platform.runLater(() -> {
             timeLabel.setText(newVal);
             if (isNerdy) {

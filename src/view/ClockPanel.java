@@ -9,18 +9,10 @@ public class ClockPanel {
 
     private AnchorPane anchorPane;
     private Label timeLabel;
-    private SidePanel sidePanel;
 
     public ClockPanel() {
         this.anchorPane = new AnchorPane();
         this.timeLabel = new Label();
-        initializeClockPanel();
-    }
-
-    public ClockPanel(SidePanel sidePanel) {
-        this.anchorPane = new AnchorPane();
-        this.timeLabel = new Label();
-        this.sidePanel = sidePanel;
         initializeClockPanel();
     }
 
@@ -30,7 +22,7 @@ public class ClockPanel {
         anchorPane.setStyle("-fx-background-color: #8ee4af");
     }
 
-    public AnchorPane getClockPane() {
+    public AnchorPane getUI() {
         return anchorPane;
     }
 

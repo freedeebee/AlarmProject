@@ -9,7 +9,6 @@ public class Main extends Application {
 
         MainController mainController = MainController.getInstance();
         mainController.initialize();
-        mainController.setPrimaryStage(primaryStage);
         primaryStage.setTitle("AlarmClock");
         primaryStage.setScene(mainController.getScene());
         primaryStage.show();

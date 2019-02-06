@@ -4,14 +4,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.AlarmPanel;
 import view.ClockPanel;
 import view.SidePanel;
 
 public class MainController {
 
-
-
-    private Stage primaryStage;
     private BorderPane root;
     private Scene scene;
     private SidePanel sidePanel;
@@ -21,7 +19,7 @@ public class MainController {
     private MainController() {
         this.root = new BorderPane();
         this.scene = new Scene(root);
-        this.sidePanel = new SidePanel();
+        this.sidePanel = SidePanel.getInstance();
         this.clockPanel = new ClockPanel();
     }
     public static MainController getInstance() {
@@ -32,23 +30,16 @@ public class MainController {
     }
 
     public void initialize() {
-        root.setCenter(clockPanel.getClockPane());
-        root.setLeft(sidePanel.getSidePaneVBox());
+        root.setCenter(clockPanel.getUI());
+        root.setLeft(sidePanel.getUI());
 
         SidePanelController sidePanelController = new SidePanelController();
         ClockController clockController = new ClockController(clockPanel);
+        AlarmController alarmController = new AlarmController();
     }
 
     public Scene getScene() {
         return scene;
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
     }
 
     public void changeInterface(Pane pane) {

@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import view.AlarmPanel;
 import view.ClockPanel;
 import view.SettingPanel;
 import view.SidePanel;
@@ -10,15 +11,16 @@ import view.SidePanel;
 public class SidePanelController {
 
     private SidePanel sidePanel;
-    private MainController mainController;
+    private MainController mainController = MainController.getInstance();
     private ClockPanel clockPanel;
     private SettingPanel settingPanel;
+    private AlarmPanel alarmPanel;
 
     public SidePanelController() {
-        this.sidePanel = new SidePanel();
-        this.mainController = MainController.getInstance();
-        this.settingPanel = new SettingPanel(sidePanel);
-        this.clockPanel = new ClockPanel(sidePanel);
+        this.sidePanel = SidePanel.getInstance();
+        this.settingPanel = new SettingPanel();
+        this.clockPanel = new ClockPanel();
+        this.alarmPanel = AlarmPanel.getInstance();
         initialize();
     }
 
@@ -28,13 +30,19 @@ public class SidePanelController {
 
         HBox settingsBtn = sidePanel.getButtonMap().get("settings");
         settingsBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.changeInterface(settingPanel.getSettingsUI());
-            System.out.println("Settings clicked");
+            mainController.changeInterface(settingPanel.getUI());
+
         });
 
         HBox clockBtn = sidePanel.getButtonMap().get("showAlarm");
         clockBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.changeInterface(clockPanel.getClockPane());
+            mainController.changeInterface(clockPanel.getUI());
+            ClockController clockController = new ClockController(clockPanel);
+        });
+
+        HBox alarmBtn = sidePanel.getButtonMap().get("newAlarm");
+        alarmBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            mainController.changeInterface(alarmPanel.getUI());
         });
     }
 }

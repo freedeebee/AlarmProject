@@ -14,10 +14,18 @@ public class SidePanel {
     private VBox sidePane;
     private HashMap<String, HBox> buttonMap;
 
-    public SidePanel() {
+    private static SidePanel instance = null;
+    private SidePanel() {
         buttonMap = new HashMap<String, HBox>();
         initializeSidePanel();
     }
+    public static SidePanel getInstance() {
+        if(instance == null) {
+            instance = new SidePanel();
+        }
+        return instance;
+    }
+
 
     private void initializeSidePanel() {
         sidePane = new VBox();
@@ -66,7 +74,7 @@ public class SidePanel {
         });
     }
 
-    public VBox getSidePaneVBox() {
+    public VBox getUI() {
         return sidePane;
     }
 

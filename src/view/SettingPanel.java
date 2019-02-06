@@ -7,21 +7,18 @@ import javafx.scene.layout.VBox;
 public class SettingPanel {
 
     private VBox vBox;
-    private SidePanel sidePanel;
-    private Scene settingsScene;
 
-    public SettingPanel(SidePanel sidePanel) {
-        this.sidePanel = sidePanel;
+    public SettingPanel() {
         this.vBox = new VBox();
         initialize();
     }
 
     public void initialize() {
         vBox.setPrefWidth(400);
-        vBox.setStyle("-fx-background-color: red");
+        vBox.setStyle("-fx-background-color: white");
     }
 
-    public VBox getSettingsUI() {
+    public VBox getUI() {
         return vBox;
     }
 }
