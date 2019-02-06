@@ -21,6 +21,7 @@ public class ClockController {
     public ClockController(ClockPanel clockPanel) {
         this.clockPanel = clockPanel;
         this.clock = new Clock();
+        initialize();
     }
 
     private ChangeListener<String> clockListener = (obs, oldVal, newVal) -> {

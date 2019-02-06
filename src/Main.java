@@ -7,9 +7,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        MainController mainController = new MainController(primaryStage);
-        mainController.initializeGUIElements();
-        mainController.initializeControllers();
+        MainController mainController = MainController.getInstance();
+        mainController.initialize();
+        mainController.setPrimaryStage(primaryStage);
         primaryStage.setTitle("AlarmClock");
         primaryStage.setScene(mainController.getScene());
         primaryStage.show();

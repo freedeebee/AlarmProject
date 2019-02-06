@@ -21,10 +21,7 @@ public class SettingPanel {
         vBox.setStyle("-fx-background-color: red");
     }
 
-    public Scene getSettingsScene() {
-        BorderPane root = new BorderPane();
-        root.setLeft(sidePanel.getSidePaneVBox());
-        root.setCenter(vBox);
-        return new Scene(root);
+    public VBox getSettingsUI() {
+        return vBox;
     }
 }

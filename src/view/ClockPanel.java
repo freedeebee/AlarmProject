@@ -38,10 +38,4 @@ public class ClockPanel {
         return timeLabel;
     }
 
-    public Scene getClockPanelScene() {
-        BorderPane root = new BorderPane();
-        root.setLeft(sidePanel.getSidePaneVBox());
-        root.setCenter(anchorPane);
-        return new Scene(root);
-    }
 }

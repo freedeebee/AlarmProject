@@ -14,11 +14,12 @@ public class SidePanelController {
     private ClockPanel clockPanel;
     private SettingPanel settingPanel;
 
-    public SidePanelController(MainController mainController, SidePanel sidePanel) {
-        this.sidePanel = sidePanel;
-        this.mainController = mainController;
+    public SidePanelController() {
+        this.sidePanel = new SidePanel();
+        this.mainController = MainController.getInstance();
         this.settingPanel = new SettingPanel(sidePanel);
         this.clockPanel = new ClockPanel(sidePanel);
+        initialize();
     }
 
     public void initialize() {
@@ -27,12 +28,13 @@ public class SidePanelController {
 
         HBox settingsBtn = sidePanel.getButtonMap().get("settings");
         settingsBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.getPrimaryStage().setScene(settingPanel.getSettingsScene());
+            mainController.changeInterface(settingPanel.getSettingsUI());
+            System.out.println("Settings clicked");
         });
 
         HBox clockBtn = sidePanel.getButtonMap().get("showAlarm");
         clockBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.getPrimaryStage().setScene(clockPanel.getClockPanelScene());
+            mainController.changeInterface(clockPanel.getClockPane());
         });
     }
 }
