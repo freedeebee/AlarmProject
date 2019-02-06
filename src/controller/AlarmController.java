@@ -18,10 +18,15 @@ public class AlarmController {
         initialize();
     }
 
-    public void initialize() {
+    private void initialize() {
         Button newAlarmBtn = alarmPanel.getNewAlarm();
         newAlarmBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             mainController.changeInterface(newAlarmPanel.getUI());
+        });
+
+        Button backFromNewAlarm = newAlarmPanel.getBackBtn();
+        backFromNewAlarm.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            mainController.changeInterface(alarmPanel.getUI());
         });
     }
 
