@@ -1,6 +1,6 @@
 package de.schad.alarm.java.view;
 
-import com.jfoenix.controls.JFXToggleButton;
+import de.schad.alarm.java.controller.AlarmController;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +25,6 @@ public class AlarmPanel implements Panel {
     private VBox vBox;
     private Label headline;
     private Button newAlarm;
-    private ObservableList<HBox> boxList;
     private ListView<HBox> boxListView;
 
     private static AlarmPanel instance = null;
@@ -49,12 +48,10 @@ public class AlarmPanel implements Panel {
         borderPane.setPrefWidth(400);
         borderPane.setStyle("-fx-background-color: #8ee4af");
 
-        Image image = new Image("de/schad/alarm/resources/icons/add_white.png");
-        ImageView imageView = new ImageView(image);
-
         TranslateTransition tt = new TranslateTransition(Duration.millis(200), newAlarm);
 
-
+        Image image = new Image("de/schad/alarm/resources/icons/add_white.png");
+        ImageView imageView = new ImageView(image);
         newAlarm.setGraphic(imageView);
         newAlarm.setPrefSize(45, 50);
         newAlarm.getStylesheets().add("de/schad/alarm/resources/css/alarm-panel.css");
@@ -97,22 +94,7 @@ public class AlarmPanel implements Panel {
         return newAlarm;
     }
 
-    public void createAlarmList(List<HBox> boxes) {
-        boxList = FXCollections.observableArrayList(boxes);
-        boxListView.getItems().clear();
-        boxListView.setItems(boxList);
-    }
-
-    public HBox createAlarmBox(String time) {
-        HBox alarmBox = new HBox();
-        Label timeLabel = new Label(time);
-        JFXToggleButton toggleAlarmButton = new JFXToggleButton();
-        Button deleteButton = new Button("Delete");
-
-        alarmBox.setStyle("-fx-background-color: white");
-        alarmBox.setMinWidth(400);
-        alarmBox.getChildren().addAll(timeLabel, toggleAlarmButton, deleteButton);
-
-        return alarmBox;
+    public void setBoxListViewItems(ObservableList list) {
+        this.boxListView.setItems(list);
     }
 }

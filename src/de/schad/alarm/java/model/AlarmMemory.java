@@ -23,11 +23,7 @@ public class AlarmMemory {
     }
 
     public void removeAlarmTime(AlarmTime time) {
-        for(AlarmTime timeit: times) {
-            if(timeit.equals(time)) {
-                times.remove(timeit);
-            }
-        }
+        times.remove(time);
     }
 
     public List<AlarmTime> getTimes() {

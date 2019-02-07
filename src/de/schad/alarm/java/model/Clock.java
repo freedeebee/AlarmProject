@@ -43,9 +43,12 @@ public class Clock implements Runnable {
                 time.setValue(fHour + ":" + fMinute + ":" + fSecond);
                 hexTime.setValue("#" + fHour + fMinute + fSecond);
 
-                if(rawTime.equals(null)) { // TODO: null durch die Alarmzeiten ersetzen
-                    fireAlarm();
+                for(AlarmTime alarmtime: memory.getTimes()) {
+                    if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive()) {
+                        fireAlarm();
+                    }
                 }
+
 
                 Thread.sleep(1000);
             }
