@@ -28,7 +28,6 @@ public class Clock implements Runnable {
             String rawTime;
 
             while (true) {
-
                 calendar = new GregorianCalendar();
                 int second = calendar.get(Calendar.SECOND);
                 int minute = calendar.get(Calendar.MINUTE);
@@ -49,7 +48,6 @@ public class Clock implements Runnable {
 
 
                 for(AlarmTime alarmtime: memory.getTimes()) {
-                    System.out.println(alarmtime.getTime());
                     if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive()) {
                         fireAlarm();
                         break;
@@ -74,7 +72,6 @@ public class Clock implements Runnable {
     }
 
     public void fireAlarm() {
-        System.out.println("fired");
         playSongThread = new Thread(() -> {
             SimpleMinim minim;
             SimpleAudioPlayer audioPlayer;

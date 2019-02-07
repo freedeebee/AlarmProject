@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import de.schad.alarm.java.model.AlarmMemory;
 import de.schad.alarm.java.model.AlarmTime;
@@ -22,7 +23,7 @@ public class AlarmController {
     private MainController mainController = MainController.getInstance();
     private AlarmMemory alarmMemory = AlarmMemory.getInstance();
     private String selectedTimeValue;
-    private ObservableList<HBox> boxesList = FXCollections.observableArrayList();
+    private ObservableList<AnchorPane> boxesList = FXCollections.observableArrayList();
 
     public AlarmController() {
         this.alarmPanel = AlarmPanel.getInstance();
@@ -72,6 +73,6 @@ public class AlarmController {
             selectedTimeValue = selectedHours + minutesString + "00";
         });
 
-        boxesList.addListener((ListChangeListener<HBox>) c -> alarmPanel.setBoxListViewItems(boxesList));
+        boxesList.addListener((ListChangeListener<AnchorPane>) c -> alarmPanel.setBoxListViewItems(boxesList));
     }
 }

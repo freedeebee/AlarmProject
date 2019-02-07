@@ -1,26 +1,25 @@
 package de.schad.alarm.java.view;
 
-import de.schad.alarm.java.controller.AlarmController;
 import javafx.animation.TranslateTransition;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-import java.util.List;
 
 
 public class AlarmPanel implements Panel {
 
+    private AnchorPane anchorPane;
+    private AnchorPane bottomAnchorPane;
     private BorderPane borderPane;
     private VBox vBox;
     private Label headline;
@@ -29,6 +28,8 @@ public class AlarmPanel implements Panel {
 
     private static AlarmPanel instance = null;
     private AlarmPanel() {
+        this.anchorPane = new AnchorPane();
+        this.bottomAnchorPane = new AnchorPane();
         this.borderPane = new BorderPane();
         this.vBox = new VBox();
         this.headline = new Label("Weckzeiten");
@@ -45,7 +46,17 @@ public class AlarmPanel implements Panel {
 
     @Override
     public void initialize() {
-        borderPane.setPrefWidth(400);
+
+        bottomAnchorPane.setBottomAnchor(newAlarm, 5.0);
+        bottomAnchorPane.setRightAnchor(newAlarm, 5.0);
+        anchorPane.setLeftAnchor(borderPane, 0.0);
+        anchorPane.setTopAnchor(borderPane, 0.0);
+        anchorPane.setRightAnchor(borderPane, 0.0);
+        anchorPane.setBottomAnchor(borderPane, 0.0);
+
+        bottomAnchorPane.setMinHeight(60);
+        anchorPane.setPrefWidth(400);
+
         borderPane.setStyle("-fx-background-color: #8ee4af");
 
         TranslateTransition tt = new TranslateTransition(Duration.millis(200), newAlarm);
@@ -56,6 +67,7 @@ public class AlarmPanel implements Panel {
         newAlarm.setPrefSize(45, 50);
         newAlarm.getStylesheets().add("de/schad/alarm/resources/css/alarm-panel.css");
         newAlarm.getStyleClass().add("add-button");
+
         newAlarm.setOnMouseEntered(value -> {
             tt.setByX(-2);
             tt.setByY(-2);
@@ -67,27 +79,31 @@ public class AlarmPanel implements Panel {
             tt.play();
         });
 
-        HBox topHBox = new HBox();
-        topHBox.setMinSize(400, 30);
-        headline.setMinWidth(400);
-        headline.setAlignment(Pos.CENTER);
-        topHBox.getChildren().add(headline);
+        headline.setFont(new Font(20));
 
-        Pane spacerBottom = new Pane();
-        HBox bottomHBox = new HBox();
-        spacerBottom.setMinSize(340, 60);
-        bottomHBox.getChildren().addAll(spacerBottom, newAlarm);
+        HBox headerHBox = new HBox();
+        headerHBox.setAlignment(Pos.CENTER);
+        headerHBox.getChildren().add(headline);
+        headerHBox.setMinHeight(50);
 
+        vBox.setStyle("-fx-background-color: transparent");
+        boxListView.setStyle("-fx-background-color: transparent");
+        boxListView.setBackground(
+                new Background(new BackgroundFill(Color.valueOf("FFFFFF"), null, null))
+        );
+        boxListView.setPadding(new Insets(0));
         vBox.getChildren().add(boxListView);
 
-        borderPane.setTop(topHBox);
+        borderPane.setTop(headerHBox);
         borderPane.setCenter(vBox);
-        borderPane.setBottom(bottomHBox);
+        borderPane.setBottom(bottomAnchorPane);
+        bottomAnchorPane.getChildren().add(newAlarm);
+        anchorPane.getChildren().add(borderPane);
     }
 
     @Override
-    public BorderPane getUI() {
-        return borderPane;
+    public AnchorPane getUI() {
+        return anchorPane;
     }
 
     public Button getNewAlarm() {

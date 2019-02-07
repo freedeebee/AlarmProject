@@ -30,6 +30,8 @@ public class MainController {
     public void initialize() {
         root.setCenter(clockPanel.getUI());
         root.setLeft(sidePanel.getUI());
+        root.getStylesheets().add("de/schad/alarm/resources/css/main.css");
+        root.getStyleClass().add("root");
 
         SidePanelController sidePanelController = new SidePanelController();
         ClockController clockController = new ClockController(clockPanel);
