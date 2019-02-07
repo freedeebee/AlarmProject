@@ -1,5 +1,7 @@
 package de.schad.alarm.java.model;
 
+import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.util.Calendar;
@@ -10,6 +12,8 @@ public class Clock implements Runnable {
     private StringProperty time;
     private StringProperty hexTime;
     private AlarmMemory memory = AlarmMemory.getInstance();
+    private Thread playSongThread;
+    private int fired = 0;
 
     public Clock() {
         time = new SimpleStringProperty();
@@ -43,12 +47,14 @@ public class Clock implements Runnable {
                 time.setValue(fHour + ":" + fMinute + ":" + fSecond);
                 hexTime.setValue("#" + fHour + fMinute + fSecond);
 
+
                 for(AlarmTime alarmtime: memory.getTimes()) {
+                    System.out.println(alarmtime.getTime());
                     if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive()) {
                         fireAlarm();
+                        break;
                     }
                 }
-
 
                 Thread.sleep(1000);
             }
@@ -68,7 +74,28 @@ public class Clock implements Runnable {
     }
 
     public void fireAlarm() {
-        System.out.println("Alarm!");
+        System.out.println("fired");
+        playSongThread = new Thread(() -> {
+            SimpleMinim minim;
+            SimpleAudioPlayer audioPlayer;
+            minim = new SimpleMinim();
+            audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
+
+            while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    playSongThread.interrupt();
+                }
+            }
+            if (!playSongThread.isInterrupted()) {
+                if (!(audioPlayer.isPlaying())) {
+                    audioPlayer.play();
+                    audioPlayer.loop();
+                }
+            }
+        });
+        playSongThread.start();
     }
 
 }

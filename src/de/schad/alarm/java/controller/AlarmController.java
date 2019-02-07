@@ -1,6 +1,7 @@
 package de.schad.alarm.java.controller;
 
 import com.jfoenix.controls.JFXToggleButton;
+import de.schad.alarm.java.model.Clock;
 import de.schad.alarm.java.view.AlarmBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -32,14 +33,10 @@ public class AlarmController {
 
     private void initialize() {
         Button newAlarmBtn = alarmPanel.getNewAlarm();
-        newAlarmBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.changeInterface(newAlarmPanel.getUI());
-        });
+        newAlarmBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> mainController.changeInterface(newAlarmPanel.getUI()));
 
         Button backFromNewAlarm = newAlarmPanel.getBackBtn();
-        backFromNewAlarm.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.changeInterface(alarmPanel.getUI());
-        });
+        backFromNewAlarm.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> mainController.changeInterface(alarmPanel.getUI()));
 
         Button saveAlarmBtn = newAlarmPanel.getSaveTimeBtn();
         saveAlarmBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
@@ -51,9 +48,7 @@ public class AlarmController {
             boxesList.add(box.getUI());
 
             JFXToggleButton onOffSwitch = box.getToggleAlarmButton();
-            onOffSwitch.addEventFilter(MouseEvent.MOUSE_CLICKED, event1 -> {
-                box.getAlarmTime().toggleActive();
-            });
+            onOffSwitch.addEventFilter(MouseEvent.MOUSE_CLICKED, event1 -> box.getAlarmTime().toggleActive());
 
             box.getDeleteButton().addEventFilter(MouseEvent.MOUSE_CLICKED, event2 -> {
                 alarmMemory.removeAlarmTime(box.getAlarmTime());
