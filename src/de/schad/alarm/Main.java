@@ -1,4 +1,6 @@
-import controller.MainController;
+package de.schad.alarm;
+
+import de.schad.alarm.java.controller.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

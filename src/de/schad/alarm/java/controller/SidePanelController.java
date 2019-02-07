@@ -1,12 +1,12 @@
-package controller;
+package de.schad.alarm.java.controller;
 
 import javafx.application.Platform;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import view.AlarmPanel;
-import view.ClockPanel;
-import view.SettingPanel;
-import view.SidePanel;
+import de.schad.alarm.java.view.AlarmPanel;
+import de.schad.alarm.java.view.ClockPanel;
+import de.schad.alarm.java.view.SettingPanel;
+import de.schad.alarm.java.view.SidePanel;
 
 public class SidePanelController {
 

@@ -1,10 +1,8 @@
-package view;
+package de.schad.alarm.java.view;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class SettingPanel {
+public class SettingPanel implements Panel {
 
     private VBox vBox;
 
@@ -13,11 +11,13 @@ public class SettingPanel {
         initialize();
     }
 
+    @Override
     public void initialize() {
         vBox.setPrefWidth(400);
         vBox.setStyle("-fx-background-color: white");
     }
 
+    @Override
     public VBox getUI() {
         return vBox;
     }

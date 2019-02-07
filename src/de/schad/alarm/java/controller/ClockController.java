@@ -1,12 +1,12 @@
-package controller;
+package de.schad.alarm.java.controller;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import model.Clock;
-import view.ClockPanel;
+import de.schad.alarm.java.model.Clock;
+import de.schad.alarm.java.view.ClockPanel;
 
 public class ClockController {
 

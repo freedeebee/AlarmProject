@@ -1,4 +1,4 @@
-package model;
+package de.schad.alarm.java.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,20 +9,22 @@ public class Clock implements Runnable {
 
     private StringProperty time;
     private StringProperty hexTime;
-    private String rawTime;
-    private Calendar calendar;
-    private String alarmTime;
+    private AlarmMemory memory = AlarmMemory.getInstance();
 
     public Clock() {
         time = new SimpleStringProperty();
         hexTime = new SimpleStringProperty();
-        alarmTime = "110100";
     }
 
     @Override
     public void run() {
         try {
+
+            Calendar calendar;
+            String rawTime;
+
             while (true) {
+
                 calendar = new GregorianCalendar();
                 int second = calendar.get(Calendar.SECOND);
                 int minute = calendar.get(Calendar.MINUTE);
@@ -41,7 +43,7 @@ public class Clock implements Runnable {
                 time.setValue(fHour + ":" + fMinute + ":" + fSecond);
                 hexTime.setValue("#" + fHour + fMinute + fSecond);
 
-                if(rawTime.equals(alarmTime)) {
+                if(rawTime.equals(null)) { // TODO: null durch die Alarmzeiten ersetzen
                     fireAlarm();
                 }
 
@@ -60,11 +62,6 @@ public class Clock implements Runnable {
 
     public StringProperty getHexTimeProperty() {
         return this.hexTime;
-    }
-
-    public void setAlarm(String time) {
-        System.out.println("Alarm set so " + time);
-        this.alarmTime = time;
     }
 
     public void fireAlarm() {

@@ -1,12 +1,10 @@
-package controller;
+package de.schad.alarm.java.controller;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import view.AlarmPanel;
-import view.ClockPanel;
-import view.SidePanel;
+import de.schad.alarm.java.view.ClockPanel;
+import de.schad.alarm.java.view.SidePanel;
 
 public class MainController {
 
