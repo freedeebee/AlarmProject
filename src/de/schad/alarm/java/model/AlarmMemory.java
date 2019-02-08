@@ -18,8 +18,17 @@ public class AlarmMemory {
         return instance;
     }
 
-    public void addAlarmTime(AlarmTime time) {
-        times.add(time);
+    public boolean addAlarmTime(AlarmTime time) {
+        boolean isAlreadyIn = false;
+        for(AlarmTime time1: times) {
+            if(time1.getTime().equals(time.getTime())) {
+                isAlreadyIn = true;
+            }
+        }
+        if(!isAlreadyIn) {
+            times.add(time);
+        }
+        return isAlreadyIn;
     }
 
     public void removeAlarmTime(AlarmTime time) {

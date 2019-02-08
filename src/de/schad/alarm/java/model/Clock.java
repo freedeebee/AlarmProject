@@ -50,7 +50,7 @@ public class Clock implements Runnable {
 
 
                 for(AlarmTime alarmtime: memory.getTimes()) {
-                    if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive() && !isRinging) {
+                    if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive()) {
                         fireAlarm();
                         break;
                     }
@@ -72,31 +72,46 @@ public class Clock implements Runnable {
         return this.hexTime;
     }
 
-    public void fireAlarm() {
-        isRinging = true;
-        playSongThread = new Thread(() -> {
-            minim = new SimpleMinim();
-            audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
+    public synchronized void fireAlarm() {
+        if (!isRinging) {
+            isRinging = true;
+            playSongThread = new Thread(() -> {
+                minim = new SimpleMinim();
+                audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
 
-            while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    playSongThread.interrupt();
+                while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        playSongThread.interrupt();
+                    }
                 }
-            }
-            if (!playSongThread.isInterrupted()) {
-                if (!(audioPlayer.isPlaying())) {
-                    audioPlayer.play();
-                    audioPlayer.loop();
+                if (!playSongThread.isInterrupted()) {
+                    if (!(audioPlayer.isPlaying())) {
+                        audioPlayer.play();
+                        audioPlayer.loop();
+                    }
                 }
-            }
-        });
-        playSongThread.start();
+            });
+            playSongThread.start();
+        }
     }
 
     public void sleep() {
-        // TODO: Sleep
+        if(isRinging) {
+            alarmOff();
+            Thread snoozeThread = new Thread(() -> {
+
+                    try {
+                        Thread.sleep(5000);
+                        fireAlarm();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+            });
+            snoozeThread.start();
+        }
     }
 
     public void alarmOff() {

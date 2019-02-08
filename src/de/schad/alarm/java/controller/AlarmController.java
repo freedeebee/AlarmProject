@@ -45,8 +45,10 @@ public class AlarmController {
             AlarmTime time = new AlarmTime(selectedTimeValue);
             AlarmBox box = new AlarmBox(time);
 
-            alarmMemory.addAlarmTime(time);
-            boxesList.add(box.getUI());
+            boolean isAlreadyIn = alarmMemory.addAlarmTime(time);
+            if(!isAlreadyIn) {
+                boxesList.add(box.getUI());
+            }
 
             JFXToggleButton onOffSwitch = box.getToggleAlarmButton();
             onOffSwitch.addEventFilter(MouseEvent.MOUSE_CLICKED, event1 -> box.getAlarmTime().toggleActive());
