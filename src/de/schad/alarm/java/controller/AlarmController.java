@@ -1,8 +1,11 @@
 package de.schad.alarm.java.controller;
 
 import com.jfoenix.controls.JFXToggleButton;
-import de.schad.alarm.java.model.Clock;
+import de.schad.alarm.java.model.AlarmMemory;
+import de.schad.alarm.java.model.AlarmTime;
 import de.schad.alarm.java.view.AlarmBox;
+import de.schad.alarm.java.view.AlarmPanel;
+import de.schad.alarm.java.view.NewAlarmPanel;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -10,11 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import de.schad.alarm.java.model.AlarmMemory;
-import de.schad.alarm.java.model.AlarmTime;
-import de.schad.alarm.java.view.AlarmPanel;
-import de.schad.alarm.java.view.NewAlarmPanel;
 
 public class AlarmController {
 
@@ -45,6 +43,7 @@ public class AlarmController {
             AlarmTime time = new AlarmTime(selectedTimeValue);
             AlarmBox box = new AlarmBox(time);
 
+            // prevent double alarms
             boolean isAlreadyIn = alarmMemory.addAlarmTime(time);
             if(!isAlreadyIn) {
                 boxesList.add(box.getUI());

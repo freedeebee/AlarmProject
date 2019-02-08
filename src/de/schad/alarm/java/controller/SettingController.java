@@ -5,16 +5,10 @@ import com.jfoenix.controls.JFXRadioButton;
 import de.schad.alarm.java.model.Setting;
 import de.schad.alarm.java.view.ClockPanel;
 import de.schad.alarm.java.view.SettingPanel;
-import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.xml.stream.EventFilter;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +34,7 @@ public class SettingController {
     public void initialize() {
         JFXButton fileChooserBtn = settingPanel.getFileChooserBtn();
         fileChooserBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if(radioProperty.equals("custom")) {
+            if(radioProperty != null && radioProperty.equals("custom")) {
                 FileChooser fileChooser = new FileChooser();
                 File file = fileChooser.showOpenDialog(new Stage());
                 if (file != null) {

@@ -74,7 +74,7 @@ public class Clock implements Runnable {
         return this.hexTime;
     }
 
-    public synchronized void fireAlarm() {
+    private synchronized void fireAlarm() {
         if (!isRinging) {
             isRinging = true;
             playSongThread = new Thread(() -> {
@@ -105,6 +105,7 @@ public class Clock implements Runnable {
                         }
                     }
                 } catch (Exception e) {
+                    // if the file path is incorrect play the default alarm
                     audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
                     while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
                         try {
@@ -126,6 +127,9 @@ public class Clock implements Runnable {
         }
     }
 
+    /**
+     * Let's a ringing alarm snooze for 5 minutes
+     */
     public void sleep() {
         if(isRinging) {
             alarmOff();

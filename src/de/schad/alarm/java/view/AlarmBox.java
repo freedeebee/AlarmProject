@@ -63,10 +63,6 @@ public class AlarmBox implements Panel{
         return anchorPane;
     }
 
-    public Label getTimeLabel() {
-        return timeLabel;
-    }
-
     public JFXToggleButton getToggleAlarmButton() {
         return toggleAlarmButton;
     }

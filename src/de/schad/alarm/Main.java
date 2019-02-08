@@ -4,6 +4,13 @@ import de.schad.alarm.java.controller.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Alarm Clock Java FX Project
+ *
+ * @author Dennis Schad
+ * @version 1.0
+ *
+ */
 public class Main extends Application {
 
     @Override

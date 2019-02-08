@@ -6,6 +6,9 @@ import javafx.scene.layout.Pane;
 import de.schad.alarm.java.view.ClockPanel;
 import de.schad.alarm.java.view.SidePanel;
 
+/**
+ * Handles all of the Controller dependencies and initializes them
+ */
 public class MainController {
 
     private BorderPane root;
@@ -33,6 +36,7 @@ public class MainController {
         root.getStylesheets().add("de/schad/alarm/resources/css/main.css");
         root.getStyleClass().add("root");
 
+        // creation of controller instances to trigger their initialization
         SidePanelController sidePanelController = new SidePanelController();
         ClockController clockController = ClockController.getInstance();
         AlarmController alarmController = new AlarmController();
@@ -43,6 +47,10 @@ public class MainController {
         return scene;
     }
 
+    /**
+     * Switches the interface next to the SidePanel
+     * @param pane
+     */
     public void changeInterface(Pane pane) {
         root.setCenter(pane);
     }

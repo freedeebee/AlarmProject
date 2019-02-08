@@ -1,17 +1,14 @@
 package de.schad.alarm.java.controller;
 
 import com.jfoenix.controls.JFXToggleButton;
-import de.schad.alarm.java.view.SidePanel;
+import de.schad.alarm.java.model.Clock;
+import de.schad.alarm.java.view.ClockPanel;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import de.schad.alarm.java.model.Clock;
-import de.schad.alarm.java.view.ClockPanel;
 
 public class ClockController {
 
@@ -36,7 +33,9 @@ public class ClockController {
         return instance;
     }
 
-
+    /**
+     * Listener for a ticking clock in nerdy and normal version
+     */
     private ChangeListener<String> clockListener = (obs, oldVal, newVal) -> {
 
         timeLabel = clockPanel.getTimeLabel();

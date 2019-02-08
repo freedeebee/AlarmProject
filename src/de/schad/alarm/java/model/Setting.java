@@ -6,16 +6,7 @@ import java.util.Properties;
 
 public class Setting {
 
-    public final String SETTINGS_FILE_PATH = "src/de/schad/alarm/properties.txt";
-    private String alarmPath;
-
-    public String getAlarmPath() {
-        return alarmPath;
-    }
-
-    public void setAlarmPath(String alarmPath) {
-        this.alarmPath = alarmPath;
-    }
+    private final String SETTINGS_FILE_PATH = "src/de/schad/alarm/properties.txt";
 
     public void writeProperty(Map<String, String> properties) {
         Writer writer = null;
