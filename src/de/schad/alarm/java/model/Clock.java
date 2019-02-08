@@ -15,6 +15,7 @@ public class Clock implements Runnable {
     private Thread playSongThread;
     private SimpleMinim minim;
     private SimpleAudioPlayer audioPlayer;
+    private boolean isRinging = false;
 
     public Clock() {
         time = new SimpleStringProperty();
@@ -49,12 +50,11 @@ public class Clock implements Runnable {
 
 
                 for(AlarmTime alarmtime: memory.getTimes()) {
-                    if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive()) {
+                    if(rawTime.equals(alarmtime.getTime()) && alarmtime.isActive() && !isRinging) {
                         fireAlarm();
                         break;
                     }
                 }
-
                 Thread.sleep(1000);
             }
 
@@ -73,6 +73,7 @@ public class Clock implements Runnable {
     }
 
     public void fireAlarm() {
+        isRinging = true;
         playSongThread = new Thread(() -> {
             minim = new SimpleMinim();
             audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
@@ -95,13 +96,14 @@ public class Clock implements Runnable {
     }
 
     public void sleep() {
-        System.out.println("Sleeping");
+        // TODO: Sleep
     }
 
     public void alarmOff() {
         if(minim != null) {
             minim.stop();
             playSongThread.interrupt();
+            isRinging = false;
         }
     }
 

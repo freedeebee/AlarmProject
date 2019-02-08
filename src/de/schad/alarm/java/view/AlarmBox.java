@@ -2,7 +2,6 @@ package de.schad.alarm.java.view;
 
 import com.jfoenix.controls.JFXToggleButton;
 import de.schad.alarm.java.model.AlarmTime;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -45,17 +44,17 @@ public class AlarmBox implements Panel{
         timeLabel.setFont(new Font(20));
 
         anchorPane.setMaxHeight(30);
-        anchorPane.setRightAnchor(alarmBox, 0.0);
-        anchorPane.setLeftAnchor(alarmBox, 0.0);
-        anchorPane.setLeftAnchor(timeLabel, 5.0);
-        anchorPane.setTopAnchor(timeLabel, 5.0);
-        anchorPane.setBottomAnchor(timeLabel, 5.0);
-        anchorPane.setRightAnchor(deleteButton, 5.0);
-        anchorPane.setTopAnchor(deleteButton, 5.0);
-        anchorPane.setBottomAnchor(deleteButton, 5.0);
-        anchorPane.setRightAnchor(toggleAlarmButton, 40.0);
-        anchorPane.setTopAnchor(toggleAlarmButton, 5.0);
-        anchorPane.setBottomAnchor(toggleAlarmButton, 5.0);
+        AnchorPane.setRightAnchor(alarmBox, 0.0);
+        AnchorPane.setLeftAnchor(alarmBox, 0.0);
+        AnchorPane.setLeftAnchor(timeLabel, 5.0);
+        AnchorPane.setTopAnchor(timeLabel, 5.0);
+        AnchorPane.setBottomAnchor(timeLabel, 5.0);
+        AnchorPane.setRightAnchor(deleteButton, 5.0);
+        AnchorPane.setTopAnchor(deleteButton, 5.0);
+        AnchorPane.setBottomAnchor(deleteButton, 5.0);
+        AnchorPane.setRightAnchor(toggleAlarmButton, 40.0);
+        AnchorPane.setTopAnchor(toggleAlarmButton, 5.0);
+        AnchorPane.setBottomAnchor(toggleAlarmButton, 5.0);
         anchorPane.getChildren().addAll(timeLabel, alarmBox, toggleAlarmButton, deleteButton);
     }
 

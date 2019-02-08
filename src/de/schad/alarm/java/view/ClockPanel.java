@@ -33,12 +33,12 @@ public class ClockPanel implements Panel {
 
         timeLabel.setFont(new Font(40));
         borderPane.setCenter(timeLabel);
-        anchorPane.setTopAnchor(toggleButton, 0.0);
-        anchorPane.setRightAnchor(toggleButton, 0.0);
-        anchorPane.setLeftAnchor(borderPane, 0.0);
-        anchorPane.setTopAnchor(borderPane, 0.0);
-        anchorPane.setRightAnchor(borderPane, 0.0);
-        anchorPane.setBottomAnchor(borderPane, 0.0);
+        AnchorPane.setTopAnchor(toggleButton, 0.0);
+        AnchorPane.setRightAnchor(toggleButton, 0.0);
+        AnchorPane.setLeftAnchor(borderPane, 0.0);
+        AnchorPane.setTopAnchor(borderPane, 0.0);
+        AnchorPane.setRightAnchor(borderPane, 0.0);
+        AnchorPane.setBottomAnchor(borderPane, 0.0);
         anchorPane.getChildren().addAll(borderPane, toggleButton);
         anchorPane.setPrefWidth(400);
         anchorPane.setStyle("-fx-background-color: #8ee4af");

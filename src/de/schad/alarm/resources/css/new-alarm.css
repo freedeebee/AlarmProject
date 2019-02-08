@@ -1,7 +1,4 @@
-.back-button {
+.button {
     -fx-background-color: transparent;
     -fx-cursor: hand;
-    -fx-font-size: 1em;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
 }

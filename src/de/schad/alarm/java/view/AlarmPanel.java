@@ -47,12 +47,12 @@ public class AlarmPanel implements Panel {
     @Override
     public void initialize() {
 
-        bottomAnchorPane.setBottomAnchor(newAlarm, 5.0);
-        bottomAnchorPane.setRightAnchor(newAlarm, 5.0);
-        anchorPane.setLeftAnchor(borderPane, 0.0);
-        anchorPane.setTopAnchor(borderPane, 0.0);
-        anchorPane.setRightAnchor(borderPane, 0.0);
-        anchorPane.setBottomAnchor(borderPane, 0.0);
+        AnchorPane.setBottomAnchor(newAlarm, 5.0);
+        AnchorPane.setRightAnchor(newAlarm, 5.0);
+        AnchorPane.setLeftAnchor(borderPane, 0.0);
+        AnchorPane.setTopAnchor(borderPane, 0.0);
+        AnchorPane.setRightAnchor(borderPane, 0.0);
+        AnchorPane.setBottomAnchor(borderPane, 0.0);
 
         bottomAnchorPane.setMinHeight(60);
         anchorPane.setPrefWidth(400);
