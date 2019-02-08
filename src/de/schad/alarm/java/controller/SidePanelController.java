@@ -19,7 +19,7 @@ public class SidePanelController {
 
     public SidePanelController() {
         this.sidePanel = SidePanel.getInstance();
-        this.settingPanel = new SettingPanel();
+        this.settingPanel = SettingPanel.getInstance();
         this.clockPanel = ClockPanel.getInstance();
         this.alarmPanel = AlarmPanel.getInstance();
         this.clockController = ClockController.getInstance();
@@ -28,7 +28,10 @@ public class SidePanelController {
 
     public void initialize() {
         HBox shutdownBtn = sidePanel.getButtonMap().get("shutdown");
-        shutdownBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> Platform.exit());
+        shutdownBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            ClockController.getInstance().alarmOff();
+            Platform.exit();
+        });
 
         HBox settingsBtn = sidePanel.getButtonMap().get("settings");
         settingsBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
@@ -39,7 +42,6 @@ public class SidePanelController {
         HBox clockBtn = sidePanel.getButtonMap().get("showAlarm");
         clockBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             mainController.changeInterface(clockPanel.getUI());
-            ClockController clockController = ClockController.getInstance();
         });
 
         HBox alarmBtn = sidePanel.getButtonMap().get("newAlarm");

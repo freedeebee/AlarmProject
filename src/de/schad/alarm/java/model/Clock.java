@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 
 public class Clock implements Runnable {
 
+    private Setting setting;
     private StringProperty time;
     private StringProperty hexTime;
     private AlarmMemory memory = AlarmMemory.getInstance();
@@ -18,6 +19,7 @@ public class Clock implements Runnable {
     private boolean isRinging = false;
 
     public Clock() {
+        this.setting = new Setting();
         time = new SimpleStringProperty();
         hexTime = new SimpleStringProperty();
     }
@@ -77,21 +79,48 @@ public class Clock implements Runnable {
             isRinging = true;
             playSongThread = new Thread(() -> {
                 minim = new SimpleMinim();
-                audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
 
-                while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        playSongThread.interrupt();
+                String radioSetting = setting.readProperty("radio");
+                String filepath = setting.readProperty("alarmpath");
+                boolean willPlayCustom = (filepath != null) && (radioSetting != null) && radioSetting.equals("custom");
+                if(willPlayCustom) {
+                    audioPlayer = minim.loadMP3File(filepath);
+                } else {
+                    audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
+                }
+
+
+                try {
+                    while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            playSongThread.interrupt();
+                        }
+                    }
+                    if (!playSongThread.isInterrupted()) {
+                        if (!(audioPlayer.isPlaying())) {
+                            audioPlayer.play();
+                            audioPlayer.loop();
+                        }
+                    }
+                } catch (Exception e) {
+                    audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
+                    while (audioPlayer.isPlaying() && !playSongThread.isInterrupted()) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            playSongThread.interrupt();
+                        }
+                    }
+                    if (!playSongThread.isInterrupted()) {
+                        if (!(audioPlayer.isPlaying())) {
+                            audioPlayer.play();
+                            audioPlayer.loop();
+                        }
                     }
                 }
-                if (!playSongThread.isInterrupted()) {
-                    if (!(audioPlayer.isPlaying())) {
-                        audioPlayer.play();
-                        audioPlayer.loop();
-                    }
-                }
+
             });
             playSongThread.start();
         }

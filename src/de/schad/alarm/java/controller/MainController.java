@@ -16,7 +16,7 @@ public class MainController {
     private static MainController instance = null;
     private MainController() {
         this.root = new BorderPane();
-        this.scene = new Scene(root);
+        this.scene = new Scene(root, 600, 400);
         this.sidePanel = SidePanel.getInstance();
         this.clockPanel = ClockPanel.getInstance();
     }
@@ -36,6 +36,7 @@ public class MainController {
         SidePanelController sidePanelController = new SidePanelController();
         ClockController clockController = ClockController.getInstance();
         AlarmController alarmController = new AlarmController();
+        SettingController settingController = new SettingController();
     }
 
     public Scene getScene() {
