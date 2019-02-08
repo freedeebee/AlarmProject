@@ -35,7 +35,7 @@ public class SidePanel implements Panel {
         buttonMap.put("shutdown", createButton("icon-shutdown.png"));
         buttonMap.put("settings", createButton("icon-settings.png"));
         buttonMap.put("newAlarm", createButton("icon-newAlarm.png"));
-        buttonMap.put("alarmOn", createButton("icon-alarmOn.png"));
+        buttonMap.put("alarmOn", createButton("sleep.png"));
         buttonMap.put("alarmOff", createButton("icon-alarmOff.png"));
         buttonMap.put("showAlarm", createButton("icon-showAlarm.png"));
 
