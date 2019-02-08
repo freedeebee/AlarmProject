@@ -103,7 +103,7 @@ public class Clock implements Runnable {
             Thread snoozeThread = new Thread(() -> {
 
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(5 * 60 * 1000); // 5 Minutes
                         fireAlarm();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
