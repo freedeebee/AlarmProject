@@ -18,7 +18,7 @@ public class MainController {
         this.root = new BorderPane();
         this.scene = new Scene(root);
         this.sidePanel = SidePanel.getInstance();
-        this.clockPanel = new ClockPanel();
+        this.clockPanel = ClockPanel.getInstance();
     }
     public static MainController getInstance() {
         if(instance == null) {
@@ -34,7 +34,7 @@ public class MainController {
         root.getStyleClass().add("root");
 
         SidePanelController sidePanelController = new SidePanelController();
-        ClockController clockController = new ClockController(clockPanel);
+        ClockController clockController = ClockController.getInstance();
         AlarmController alarmController = new AlarmController();
     }
 

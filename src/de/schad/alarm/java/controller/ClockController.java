@@ -1,11 +1,14 @@
 package de.schad.alarm.java.controller;
 
 import com.jfoenix.controls.JFXToggleButton;
+import de.schad.alarm.java.view.SidePanel;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import de.schad.alarm.java.model.Clock;
 import de.schad.alarm.java.view.ClockPanel;
@@ -20,11 +23,19 @@ public class ClockController {
 
     private boolean isNerdy = false;
 
-    public ClockController(ClockPanel clockPanel) {
-        this.clockPanel = clockPanel;
+    private static ClockController instance = null;
+    private ClockController() {
+        this.clockPanel = ClockPanel.getInstance();
         this.clock = new Clock();
         initialize();
     }
+    public static ClockController getInstance() {
+        if(instance == null) {
+            instance = new ClockController();
+        }
+        return instance;
+    }
+
 
     private ChangeListener<String> clockListener = (obs, oldVal, newVal) -> {
 
@@ -62,5 +73,13 @@ public class ClockController {
             isNerdy = !isNerdy;
 
         });
+    }
+
+    public void sleep() {
+        clock.sleep();
+    }
+
+    public void alarmOff() {
+        clock.alarmOff();
     }
 }

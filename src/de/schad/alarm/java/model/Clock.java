@@ -13,7 +13,8 @@ public class Clock implements Runnable {
     private StringProperty hexTime;
     private AlarmMemory memory = AlarmMemory.getInstance();
     private Thread playSongThread;
-    private int fired = 0;
+    private SimpleMinim minim;
+    private SimpleAudioPlayer audioPlayer;
 
     public Clock() {
         time = new SimpleStringProperty();
@@ -73,8 +74,6 @@ public class Clock implements Runnable {
 
     public void fireAlarm() {
         playSongThread = new Thread(() -> {
-            SimpleMinim minim;
-            SimpleAudioPlayer audioPlayer;
             minim = new SimpleMinim();
             audioPlayer = minim.loadMP3File("src/de/schad/alarm/resources/alarmtones/alarm_beep.mp3");
 
@@ -93,6 +92,17 @@ public class Clock implements Runnable {
             }
         });
         playSongThread.start();
+    }
+
+    public void sleep() {
+        System.out.println("Sleeping");
+    }
+
+    public void alarmOff() {
+        if(minim != null) {
+            minim.stop();
+            playSongThread.interrupt();
+        }
     }
 
 }

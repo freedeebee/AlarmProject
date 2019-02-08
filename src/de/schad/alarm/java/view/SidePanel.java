@@ -35,12 +35,12 @@ public class SidePanel implements Panel {
         buttonMap.put("shutdown", createButton("icon-shutdown.png"));
         buttonMap.put("settings", createButton("icon-settings.png"));
         buttonMap.put("newAlarm", createButton("icon-newAlarm.png"));
-        buttonMap.put("alarmOn", createButton("sleep.png"));
+        buttonMap.put("sleep", createButton("sleep.png"));
         buttonMap.put("alarmOff", createButton("icon-alarmOff.png"));
         buttonMap.put("showAlarm", createButton("icon-showAlarm.png"));
 
         sidePane.getChildren().add(buttonMap.get("newAlarm"));
-        sidePane.getChildren().add(buttonMap.get("alarmOn"));
+        sidePane.getChildren().add(buttonMap.get("sleep"));
         sidePane.getChildren().add(buttonMap.get("alarmOff"));
         sidePane.getChildren().add(buttonMap.get("showAlarm"));
         sidePane.getChildren().add(buttonMap.get("settings"));

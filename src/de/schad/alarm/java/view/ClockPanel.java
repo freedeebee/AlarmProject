@@ -13,12 +13,19 @@ public class ClockPanel implements Panel {
     private JFXToggleButton toggleButton;
     private Label timeLabel;
 
-    public ClockPanel() {
+    private static ClockPanel instance = null;
+    private ClockPanel() {
         this.anchorPane = new AnchorPane();
         this.borderPane = new BorderPane();
         this.toggleButton = new JFXToggleButton();
         this.timeLabel = new Label();
         initialize();
+    }
+    public static ClockPanel getInstance() {
+        if(instance == null) {
+            instance = new ClockPanel();
+        }
+        return instance;
     }
 
     @Override
